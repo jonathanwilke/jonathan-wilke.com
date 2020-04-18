@@ -40,20 +40,21 @@ export default function Home() {
             />
           </div>
         </nav>
-        <div className="px-8 py-12 md:py-16 lg:py-24">
+        <div className="px-8 pt-6 pb-12 md:py-12 lg:pt-12 lg:pb-16">
           <div className="container mx-auto">
             <div className="flex flex-col md:flex-row md:items-center">
-              <div className="mb-8 md:mb-0 mr-10">
+              <div className="mb-8 md:mb-0 mr-10 md:w-1/2">
                 <h2
                   className={`${
                     isDarkMode ? 'text-white' : 'text-blue-900'
-                  } text-4xl sm:text-5xl lg:text-6xl leading-none font-bold mb-6`}
+                  } text-4xl sm:text-5xl lg:text-6xl leading-tight font-bold mb-6`}
                 >
-                  Development <br />& Design
+                  <span className="text-blue-500">Development & Design</span>{' '}
+                  für Ihr digitales Business
                 </h2>
                 <p className="mb-6">
-                  Ich entwickle und gestalte für Sie individuelle Lösungen für
-                  Websites und mobile Applikationen.
+                  Gemeinsam mit meinen Kunden entwickle und gestalte ich
+                  individuelle Lösungen für Mobile- und Web-Applikationen.
                 </p>
                 <button
                   className={`${
@@ -66,7 +67,7 @@ export default function Home() {
                   Switch night mode
                 </button>
               </div>
-              <div>
+              <div className="md:w-1/2">
                 <img src="/work-kammbaeck.png" alt="Kammbäck Frisöre" />
               </div>
             </div>
@@ -79,7 +80,7 @@ export default function Home() {
           isDarkMode
             ? 'bg-gradient-dark text-blue-200'
             : 'bg-gradient-light text-blue-900'
-        } px-8 pt-12`}
+        } px-8 pt-16`}
       >
         <div className="container mx-auto">
           <div className="flex flex-col-reverse md:flex-row md:items-center">
@@ -110,13 +111,13 @@ export default function Home() {
           isDarkMode
             ? 'bg-gradient-dark text-blue-200'
             : 'bg-gradient-light text-blue-900'
-        } px-8 py-12`}
+        } px-8 py-16`}
       >
         <div className="container mx-auto">
           <h2
             className={`${
               isDarkMode ? 'text-white' : 'text-blue-900'
-            } text-4xl sm:text-5xl lg:text-6xl leading-none font-bold mb-6`}
+            } text-4xl sm:text-5xl lg:text-6xl leading-none font-bold mb-8`}
           >
             Meine Projekte
           </h2>
