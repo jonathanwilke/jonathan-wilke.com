@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
+// import chroma from 'chroma-js'
 import projects from '../projects'
 
 export default function Home() {
@@ -122,10 +123,12 @@ export default function Home() {
           {projects.map((project, i) => (
             <div
               key={i}
-              className={`rounded-lg px-8 py-10 flex flex-col ${
+              className={`shadow-lg rounded-lg px-8 py-10 flex flex-col ${
                 i % 2 == 0 ? 'md:flex-row' : 'md:flex-row-reverse'
               } items-center mb-6 text-center`}
-              style={{ background: project.backgroundColor }}
+              style={{
+                background: project.backgroundColor,
+              }}
             >
               <div
                 className={`md:w-1/2 lg:w-1/3 mb-8 md:mb-0 ${
