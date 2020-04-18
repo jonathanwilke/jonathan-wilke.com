@@ -53,9 +53,9 @@ export default function Home() {
                 <button
                   className={`${
                     isDarkMode
-                      ? 'bg-blue-900 text-blue-400 hover:bg-blue-800'
-                      : 'bg-blue-100 text-blue-600 hover:bg-blue-200'
-                  } px-6 py-2 rounded-full transition-color duration-150 ease-in-out`}
+                      ? 'bg-blue-900 hover:bg-blue-800'
+                      : 'bg-blue-100 hover:bg-blue-200'
+                  } font-bold text-blue-500 px-6 py-2 rounded-full transition-color duration-150 ease-in-out`}
                   onClick={() => setDarkMode(!isDarkMode)}
                 >
                   Switch night mode
