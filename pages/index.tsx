@@ -14,6 +14,7 @@ import {
   Mail,
   Menu,
 } from 'react-feather'
+import Slider from '../components/Slider'
 
 export default function Home() {
   const [isTop, setIsTop] = useState(true)
@@ -97,7 +98,10 @@ export default function Home() {
           content="Gemeinsam mit meinen Kunden entwickle und gestalte ich
                 individuelle Lösungen für Mobile- und Web-Applikationen."
         />
-        <meta property="og:image" content="/icon.png" />
+        <meta
+          property="og:image"
+          content="https://jonathan-wilke.com/icon.png"
+        />
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://jonathan-wilke.com/" />
@@ -110,7 +114,10 @@ export default function Home() {
           content="Gemeinsam mit meinen Kunden entwickle und gestalte ich
                 individuelle Lösungen für Mobile- und Web-Applikationen."
         />
-        <meta property="twitter:image" content="/icon.png" />
+        <meta
+          property="twitter:image"
+          content="https://jonathan-wilke.com/icon.png"
+        />
         <link rel="icon" href="/favicon.png" />
         <link
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
@@ -250,7 +257,7 @@ export default function Home() {
               <h2
                 className={`${
                   isDarkMode ? 'text-white' : 'text-blue-900'
-                } text-4xl sm:text-5xl lg:text-6xl leading-tight font-bold mb-6`}
+                } text-4xl sm:text-5xl leading-tight font-bold mb-6`}
               >
                 <span className="text-blue-500">Development & Design</span> für
                 Ihr digitales Business
@@ -272,7 +279,7 @@ export default function Home() {
               </a>
             </div>
             <div className="md:w-1/2">
-              <img src="/work-kammbaeck.png" alt="Kammbäck Frisöre" />
+              <Slider />
             </div>
           </div>
         </div>
@@ -295,17 +302,16 @@ export default function Home() {
               <h1
                 className={`${
                   isDarkMode ? 'text-white' : 'text-blue-900'
-                } font-bold text-4xl sm:text-5xl lg:text-6xl mb-6 leading-none`}
+                } font-bold text-4xl sm:text-5xl mb-6 leading-none`}
               >
                 Über mich
               </h1>
               <p className="mb-6">
-                Ich bin Jonathan Wilke und entwickle und gestalte ich seit über
-                13 Jahren Mobile- und Web-Applikationen. Die letzen 3 Jahre habe
+                Ich bin Jonathan Wilke und entwickle und gestalte seit über 13
+                Jahren Mobile- und Web-Applikationen. Die letzen 3 Jahre habe
                 ich Computervisualistik und Design studiert. Durch viele
                 verschiedene Projekte konnte ich schon viel Erfahrung in einem
-                breiten Spektrum von Programmiersprachen und Frameworks sammeln
-                konnte.
+                breiten Spektrum an Programmiersprachen und Frameworks sammeln.
               </p>
               <ul>
                 <li
@@ -386,7 +392,7 @@ export default function Home() {
           <h2
             className={`${
               isDarkMode ? 'text-white' : 'text-blue-900'
-            } text-4xl sm:text-5xl lg:text-6xl leading-none md:text-center font-bold mb-12`}
+            } text-4xl sm:text-5xl leading-none md:text-center font-bold mb-12`}
           >
             Meine Projekte
           </h2>
@@ -463,22 +469,22 @@ export default function Home() {
           <div className="flex flex-col md:flex-row">
             <div className="md:w-1/2">
               <h2
-                className={`text-white text-4xl sm:text-5xl lg:text-6xl leading-none font-bold mb-8`}
+                className={`text-white text-4xl sm:text-5xl leading-none font-bold mb-8`}
               >
                 Kontakt
               </h2>
               <p className="mb-8">
-                Wenn Sie Interesse haben ein Projekt mit mir umzusetzen, melden
-                Sie sich gerne bei mir oder rufen Sie mich an. Ich freue mich
-                darauf, von Ihnen zu hören!
+                Wenn Sie Interesse haben ein Projekt mit mir zusammen
+                umzusetzen, schreiben Sie mir gerne eine Nachricht oder rufen
+                Sie mich an. Ich freue mich darauf, von Ihnen zu hören!
               </p>
               <ul className="flex items-start flex-wrap mb-8">
-                <li className="mb-4 mr-6">
+                <li className="mb-3 mr-6">
                   <a
                     href="http://twitter.com/jonathan_wilke"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block h-10 rounded-full text-center leading-10"
+                    className="inline-block rounded-full text-center leading-10"
                   >
                     <Phone
                       size={20}
@@ -490,7 +496,7 @@ export default function Home() {
                 <li>
                   <a
                     href="mailto:info@jonathan-wilke.de"
-                    className="inline-block h-10 rounded-full text-center leading-10"
+                    className="inline-block rounded-full text-center leading-10"
                   >
                     <Mail size={20} className="inline-block mr-3  text-white" />
                     <span>info@jonathan-wilke.de</span>
@@ -574,7 +580,7 @@ export default function Home() {
                       disabled={state.submitting}
                       className="bg-blue-800 font-bold text-white px-6 py-2 w-full rounded-full hover:bg-blue-700 transition-colors duration-150 ease-in-out disabled:opacity-50"
                     >
-                      Absenden
+                      {state.submitting ? 'Wird gesendet...' : 'Absenden'}
                     </button>
                   </div>
                 )}
