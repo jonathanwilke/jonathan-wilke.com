@@ -1,17 +1,53 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback, MouseEvent } from 'react'
 import Head from 'next/head'
 // import chroma from 'chroma-js'
 import projects from '../projects'
+import { useForm, ValidationError } from '@statickit/react'
+import {
+  ArrowRight,
+  Twitter,
+  GitHub,
+  Facebook,
+  Moon,
+  Sun,
+  Phone,
+  Mail,
+  Menu,
+} from 'react-feather'
 
 export default function Home() {
+  const [isTop, setIsTop] = useState(true)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [visibleSection, setVisibleSection] = useState('hero')
+  const [state, handleSubmit] = useForm('contactForm')
   const currentHours = new Date().getHours()
   const [isDarkMode, setDarkMode] = useState(
-    false // currentHours > 20 || currentHours < 8 ? true : false
+    currentHours > 20 || currentHours < 8 ? true : false
   )
 
-  const getModeTextColor = () => {
-    return isDarkMode ? 'text-white' : 'text-blue-900'
+  const handleScroll = useCallback(() => {
+    if (window.scrollY < 50 !== isTop) {
+      console.log('change this!')
+      setIsTop(window.scrollY < 50)
+    }
+  }, [isTop, setIsTop])
+
+  const toggleDarkMode = (e: MouseEvent) => {
+    e.preventDefault()
+    setDarkMode(!isDarkMode)
   }
+
+  const toggleMenu = (e: MouseEvent) => {
+    e.preventDefault()
+    setMenuOpen(!menuOpen)
+  }
+
+  useEffect(() => {
+    handleScroll()
+    window.addEventListener('scroll', handleScroll)
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  })
 
   return (
     <div className="font-display">
@@ -24,58 +60,150 @@ export default function Home() {
         />
       </Head>
 
-      <div
+      <nav
+        className={`${
+          !isTop || menuOpen
+            ? (isDarkMode ? 'bg-gradient-dark' : 'bg-gradient-light') +
+              ' shadow-xs'
+            : 'bg-transparent'
+        } ${isDarkMode ? 'text-white' : 'text-blue-900'} ${
+          menuOpen ? 'h-full' : 'h-24'
+        } lg:h-auto p-8 fixed top-0 left-0 w-full transition duration-150 ease-in-out z-50 overflow-hidden transition-all duration-300 ease-in-out`}
+      >
+        <div
+          className={`container mx-auto flex flex-col lg:flex-row justify-between items-center ${
+            menuOpen ? 'h-full' : 'h-auto'
+          } lg:h-auto`}
+        >
+          <div className="flex justify-between items-center w-full mb-8 lg:mb-0 lg:w-auto">
+            <img
+              src={isDarkMode ? '/logo-dark.png' : '/logo-light.png'}
+              style={{ maxWidth: '15rem' }}
+              className="block flex-shrink-0 flex-grow-0 flex-auto"
+              alt="Jonathan Wilke - Development & Design"
+            />
+            <a href="#" onClick={toggleMenu} className="lg:hidden">
+              <Menu />
+            </a>
+          </div>
+          <ul className="flex flex-col lg:flex-row items-center text-md mb-8 lg:mb-0">
+            <li>
+              <a href="#about" className="p-4 block font-bold">
+                Über mich
+              </a>
+            </li>
+            <li>
+              <a href="#projects" className="p-4 block font-bold">
+                Projekte
+              </a>
+            </li>
+            <li>
+              <a href="#contact" className="p-4 block font-bold">
+                Kontakt
+              </a>
+            </li>
+          </ul>
+
+          <ul className="flex items-center">
+            <li>
+              <a
+                href="#"
+                onClick={toggleDarkMode}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block font-bold w-10 h-10 rounded-full text-center leading-10"
+              >
+                {isDarkMode ? (
+                  <Sun className="inline-block" />
+                ) : (
+                  <Moon className="inline-block" />
+                )}
+              </a>
+            </li>
+            <li>
+              <a
+                href="http://twitter.com/jonathan_wilke"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${
+                  isDarkMode ? 'bg-blue-800' : 'bg-white'
+                } inline-block font-bold w-10 h-10 rounded-full text-center leading-10  text-blue-500 ml-4`}
+              >
+                <Twitter size={20} className="inline-block" />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.facebook.com/wilke.jon"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${
+                  isDarkMode ? 'bg-blue-800' : 'bg-white'
+                } inline-block font-bold w-10 h-10 rounded-full text-center leading-10  text-blue-500 ml-4`}
+              >
+                <Facebook size={20} className="inline-block" />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/jonathanwilke"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${
+                  isDarkMode ? 'bg-blue-800' : 'bg-white'
+                } inline-block font-bold w-10 h-10 rounded-full text-center leading-10  text-blue-500 ml-4`}
+              >
+                <GitHub size={20} className="inline-block" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <section
+        id="hero"
         className={`${
           isDarkMode
             ? 'bg-gradient-dark text-blue-200'
             : 'bg-gradient-light text-blue-900'
-        }`}
+        } px-8 pb-32 pt-40`}
       >
-        <nav className="p-8">
-          <div className="container mx-auto">
-            <img
-              src={isDarkMode ? '/logo-dark.png' : '/logo-light.png'}
-              style={{ maxWidth: '15rem' }}
-              alt="Jonathan Wilke - Development & Design"
-            />
-          </div>
-        </nav>
-        <div className="px-8 pt-6 pb-12 md:py-12 lg:pt-12 lg:pb-16">
-          <div className="container mx-auto">
-            <div className="flex flex-col md:flex-row md:items-center">
-              <div className="mb-8 md:mb-0 mr-10 md:w-1/2">
-                <h2
-                  className={`${
-                    isDarkMode ? 'text-white' : 'text-blue-900'
-                  } text-4xl sm:text-5xl lg:text-6xl leading-tight font-bold mb-6`}
-                >
-                  <span className="text-blue-500">Development & Design</span>{' '}
-                  für Ihr digitales Business
-                </h2>
-                <p className="mb-6">
-                  Gemeinsam mit meinen Kunden entwickle und gestalte ich
-                  individuelle Lösungen für Mobile- und Web-Applikationen.
-                </p>
-                <button
-                  className={`${
-                    isDarkMode
-                      ? 'bg-blue-900 hover:bg-blue-800'
-                      : 'bg-blue-100 hover:bg-blue-200'
-                  } font-bold text-blue-500 px-6 py-2 rounded-full transition-color duration-150 ease-in-out`}
-                  onClick={() => setDarkMode(!isDarkMode)}
-                >
-                  Switch night mode
-                </button>
-              </div>
-              <div className="md:w-1/2">
-                <img src="/work-kammbaeck.png" alt="Kammbäck Frisöre" />
-              </div>
+        <div className="container mx-auto">
+          <div className="flex flex-col md:flex-row md:items-center">
+            <div className="mb-8 md:mb-0 mr-10 md:w-1/2">
+              <h2
+                className={`${
+                  isDarkMode ? 'text-white' : 'text-blue-900'
+                } text-4xl sm:text-5xl lg:text-6xl leading-tight font-bold mb-6`}
+              >
+                <span className="text-blue-500">Development & Design</span> für
+                Ihr digitales Business
+              </h2>
+              <p className="mb-6">
+                Gemeinsam mit meinen Kunden entwickle und gestalte ich
+                individuelle Lösungen für Mobile- und Web-Applikationen.
+              </p>
+              <a
+                className={`${
+                  isDarkMode
+                    ? 'bg-blue-900 hover:bg-blue-800'
+                    : 'bg-blue-100 hover:bg-blue-200'
+                } font-bold text-blue-500 px-6 py-2 rounded-full transition-color duration-150 ease-in-out`}
+                href="#projects"
+              >
+                Meine Projekte ansehen{' '}
+                <ArrowRight size={16} className="inline-block" />
+              </a>
+            </div>
+            <div className="md:w-1/2">
+              <img src="/work-kammbaeck.png" alt="Kammbäck Frisöre" />
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div
+      <section
+        id="about"
         className={`${
           isDarkMode
             ? 'bg-gradient-dark text-blue-200'
@@ -87,7 +215,7 @@ export default function Home() {
             <div className="md:w-1/2">
               <img src="/jonathan.png" alt="Jonathan Wilke" />
             </div>
-            <div className="md:ml-10 pb-8 md:pb-12 md:w-1/2">
+            <div className="md:ml-10 pb-16 md:w-1/2">
               <h1
                 className={`${
                   isDarkMode ? 'text-white' : 'text-blue-900'
@@ -95,18 +223,63 @@ export default function Home() {
               >
                 Über mich
               </h1>
-              <p>
+              <p className="mb-6">
                 Ich bin Jonathan Wilke und entwickle und gestalte ich seit über
-                13 Jahren leidenschaftlich Websites und Apps, wodurch ich schon
-                viel Erfahrung mit in einem breiten Spektrum von
-                Programmiersprachen sammeln konnte.
+                13 Jahren Mobile- und Web-Applikationen. Die letzen 3 Jahre habe
+                ich Computervisualistik und Design studiert. Durch viele
+                verschiedene Projekte konnte ich schon viel Erfahrung in einem
+                breiten Spektrum von Programmiersprachen und Frameworks sammeln
+                konnte.
               </p>
+              <ul>
+                <li className="bg-blue-200 block rounded-full mb-2">
+                  <span
+                    className="bg-blue-500 block py-1 px-4 text-sm text-white font-bold rounded-full"
+                    style={{ width: '90%' }}
+                  >
+                    UI / UX Design
+                  </span>
+                </li>
+                <li className="bg-blue-200 block rounded-full mb-2">
+                  <span
+                    className="bg-blue-500 block py-1 px-4 text-sm text-white font-bold rounded-full"
+                    style={{ width: '100%' }}
+                  >
+                    HTML 5 / CSS 3
+                  </span>
+                </li>
+                <li className="bg-blue-200 block rounded-full mb-2">
+                  <span
+                    className="bg-blue-500 block py-1 px-4 text-sm text-white font-bold rounded-full"
+                    style={{ width: '90%' }}
+                  >
+                    JavaScript / NodeJS
+                  </span>
+                </li>
+                <li className="bg-blue-200 block rounded-full mb-2">
+                  <span
+                    className="bg-blue-500 block py-1 px-4 text-sm text-white font-bold rounded-full"
+                    style={{ width: '70%' }}
+                  >
+                    PHP
+                  </span>
+                </li>
+                <li className="bg-blue-200 block rounded-full mb-2">
+                  <span
+                    className="bg-blue-500 block py-1 px-4 text-sm text-white font-bold rounded-full"
+                    style={{ width: '50%' }}
+                  >
+                    Go
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div
+      <section
+        id="projects"
         className={`${
           isDarkMode
             ? 'bg-gradient-dark text-blue-200'
@@ -117,7 +290,7 @@ export default function Home() {
           <h2
             className={`${
               isDarkMode ? 'text-white' : 'text-blue-900'
-            } text-4xl sm:text-5xl lg:text-6xl leading-none font-bold mb-8`}
+            } text-4xl sm:text-5xl lg:text-6xl leading-none md:text-center font-bold mb-12`}
           >
             Meine Projekte
           </h2>
@@ -184,7 +357,146 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </div>
+      </section>
+
+      <section
+        id="contact"
+        className="bg-gradient-blue px-8 py-16 text-blue-900"
+      >
+        <div className="container max-w-screen-sm md:max-w-screen-lg mx-auto">
+          <div className="flex flex-col md:flex-row">
+            <div className="md:w-1/2">
+              <h2
+                className={`text-white text-4xl sm:text-5xl lg:text-6xl leading-none font-bold mb-8`}
+              >
+                Kontakt
+              </h2>
+              <p className="mb-8">
+                Wenn Sie Interesse haben ein Projekt mit mir umzusetzen, melden
+                Sie sich gerne bei mir oder rufen Sie mich an. Ich freue mich
+                darauf, von Ihnen zu hören!
+              </p>
+              <ul className="flex items-start flex-wrap mb-8">
+                <li className="mb-4 mr-6">
+                  <a
+                    href="http://twitter.com/jonathan_wilke"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block h-10 rounded-full text-center leading-10"
+                  >
+                    <Phone
+                      size={20}
+                      className="inline-block mr-3  text-white"
+                    />
+                    <span>0151 4056 3078</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="mailto:info@jonathan-wilke.de"
+                    className="inline-block h-10 rounded-full text-center leading-10"
+                  >
+                    <Mail size={20} className="inline-block mr-3  text-white" />
+                    <span>info@jonathan-wilke.de</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="md:w-1/2 md:ml-12">
+              <form onSubmit={handleSubmit}>
+                {state.succeeded && (
+                  <div className="text-center text-white text-blue-900 font-bold">
+                    Vielen Dank für Ihre Anfrage! Ich werde mich so bald wie
+                    möglich bei Ihnen melden.
+                  </div>
+                )}
+
+                {!state.succeeded && (
+                  <div>
+                    <div className="mb-6">
+                      <label
+                        htmlFor="name"
+                        className="block mb-2 font-bold text-blue-900"
+                      >
+                        Name
+                      </label>
+                      <input
+                        id="name"
+                        type="name"
+                        name="name"
+                        className="px-6 py-2 rounded-lg w-full text-white bg-transparent border-2 border-blue-600 hover:border-blue-700 focus:border-white outline-none transition-colors ease-in-out duration-150"
+                        required
+                      />
+                      <ValidationError
+                        prefix="Name"
+                        field="name"
+                        errors={state.errors}
+                      />
+                    </div>
+
+                    <div className="mb-6">
+                      <label
+                        htmlFor="email"
+                        className="block mb-2 font-bold text-blue-900"
+                      >
+                        E-Mail
+                      </label>
+                      <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        className="px-6 py-2 rounded-lg w-full bg-transparent text-white border-2 border-blue-600 hover:border-blue-700 focus:border-white outline-none transition-colors ease-in-out duration-150"
+                        required
+                      />
+                      <ValidationError
+                        prefix="Email"
+                        field="email"
+                        errors={state.errors}
+                      />
+                    </div>
+                    <div className="mb-6">
+                      <label
+                        htmlFor="email"
+                        className="block mb-2 font-bold text-blue-900"
+                      >
+                        Nachricht
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        className="px-6 py-4 rounded-lg w-full h-24 text-white bg-transparent border-2 border-blue-600 hover:border-blue-700 focus:border-white outline-none transition-colors ease-in-out duration-150"
+                        required
+                      />
+                      <ValidationError
+                        prefix="Nachricht"
+                        field="message"
+                        errors={state.errors}
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={state.submitting}
+                      className="bg-blue-800 font-bold text-white px-6 py-2 w-full rounded-full hover:bg-blue-700 transition-colors duration-150 ease-in-out disabled:opacity-50"
+                    >
+                      Absenden
+                    </button>
+                  </div>
+                )}
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer
+        className={`${
+          isDarkMode
+            ? 'bg-gradient-dark text-blue-200'
+            : 'bg-gradient-light text-blue-900'
+        } px-8 py-16 text-center`}
+      >
+        © Copyright 2020 by Jonathan Wilke - <a href="/impressum">Impressum</a>{' '}
+        - <a href="/datenschutzerklaerrung">Datenschutzerklärung</a>
+      </footer>
     </div>
   )
 }

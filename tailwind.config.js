@@ -41,10 +41,14 @@ module.exports = {
           1000: '#000e19',
         },
       },
+      borderRadius: {
+        lg: '1rem',
+      },
     },
   },
   variants: {
     scale: ['hover', 'focus'],
+    opacity: ['disabled'],
   },
   plugins: [gradientPlugin],
 }
