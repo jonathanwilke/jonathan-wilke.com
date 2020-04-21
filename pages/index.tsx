@@ -21,19 +21,25 @@ export default function Home() {
   const [visibleSection, setVisibleSection] = useState('hero')
   const [state, handleSubmit] = useForm('contactForm')
   const currentHours = new Date().getHours()
-  const [isDarkMode, setDarkMode] = useState(
-    currentHours > 20 || currentHours < 8 ? true : false
-  )
-
-  console.log('menuOpen: ', menuOpen)
-  console.log('isTop: ', isTop)
-  console.log('isDarkMode: ', isDarkMode)
+  const [isDarkMode, setDarkMode] = useState(false)
 
   const handleScroll = useCallback(() => {
+    const sections = document.getElementsByTagName('section')
+    const offsetY = window.scrollY + window.innerHeight
+
     if (window.scrollY < 50 !== isTop) {
       setIsTop(window.scrollY < 50)
     }
-  }, [isTop, setIsTop])
+
+    let currentSection = sections[0].id
+    for (let i = 0; i < sections.length; i++) {
+      if (sections[i].offsetTop + window.innerHeight / 2 > offsetY) {
+        break
+      }
+      currentSection = sections[i].id
+    }
+    setVisibleSection(currentSection)
+  }, [isTop, setIsTop, visibleSection, setVisibleSection])
 
   const toggleDarkMode = (e: MouseEvent) => {
     e.preventDefault()
@@ -45,12 +51,31 @@ export default function Home() {
     setMenuOpen(!menuOpen)
   }
 
+  const scrollToSection = (event: MouseEvent, sectionId: string) => {
+    event.preventDefault()
+    const section = document.getElementById(sectionId)
+
+    if (section) {
+      const sectionOffset = section.offsetTop
+      window.scrollTo({
+        top: sectionOffset - 80,
+        behavior: 'smooth',
+      })
+    }
+
+    setMenuOpen(false)
+  }
+
   useEffect(() => {
     handleScroll()
     window.addEventListener('scroll', handleScroll)
 
     return () => window.removeEventListener('scroll', handleScroll)
-  })
+  }, [handleScroll])
+
+  useEffect(() => {
+    setDarkMode(currentHours > 20 || currentHours < 8 ? true : false)
+  }, [])
 
   return (
     <div className="font-display">
@@ -76,7 +101,7 @@ export default function Home() {
         <div
           className={`container mx-auto flex flex-col lg:flex-row justify-between items-center ${
             menuOpen ? 'h-full' : 'h-auto'
-          } lg:h-auto transition-all duration-300 ease-in-out`}
+          } lg:h-auto`}
         >
           <div className="flex justify-between items-center w-full mb-8 lg:mb-0 lg:w-auto">
             <img
@@ -91,17 +116,35 @@ export default function Home() {
           </div>
           <ul className="flex flex-col lg:flex-row items-center text-lg lg:text-md mb-8 lg:mb-0">
             <li>
-              <a href="#about" className="p-4 block font-bold">
+              <a
+                href="#about"
+                onClick={(e) => scrollToSection(e, 'about')}
+                className={`p-4 block font-bold ${
+                  visibleSection === 'about' && 'text-blue-500'
+                }`}
+              >
                 Über mich
               </a>
             </li>
             <li>
-              <a href="#projects" className="p-4 block font-bold">
+              <a
+                href="#projects"
+                onClick={(e) => scrollToSection(e, 'projects')}
+                className={`p-4 block font-bold ${
+                  visibleSection === 'projects' && 'text-blue-500'
+                }`}
+              >
                 Projekte
               </a>
             </li>
             <li>
-              <a href="#contact" className="p-4 block font-bold">
+              <a
+                href="#contact"
+                onClick={(e) => scrollToSection(e, 'contact')}
+                className={`p-4 block font-bold ${
+                  visibleSection === 'contact' && 'text-blue-500'
+                }`}
+              >
                 Kontakt
               </a>
             </li>
@@ -235,7 +278,11 @@ export default function Home() {
                 konnte.
               </p>
               <ul>
-                <li className="bg-blue-200 block rounded-full mb-2">
+                <li
+                  className={`${
+                    isDarkMode ? 'bg-blue-800' : 'bg-blue-200'
+                  } block rounded-full mb-2`}
+                >
                   <span
                     className="bg-blue-500 block py-1 px-4 text-sm text-white font-bold rounded-full"
                     style={{ width: '90%' }}
@@ -243,7 +290,11 @@ export default function Home() {
                     UI / UX Design
                   </span>
                 </li>
-                <li className="bg-blue-200 block rounded-full mb-2">
+                <li
+                  className={`${
+                    isDarkMode ? 'bg-blue-800' : 'bg-blue-200'
+                  } block rounded-full mb-2`}
+                >
                   <span
                     className="bg-blue-500 block py-1 px-4 text-sm text-white font-bold rounded-full"
                     style={{ width: '100%' }}
@@ -251,7 +302,11 @@ export default function Home() {
                     HTML 5 / CSS 3
                   </span>
                 </li>
-                <li className="bg-blue-200 block rounded-full mb-2">
+                <li
+                  className={`${
+                    isDarkMode ? 'bg-blue-800' : 'bg-blue-200'
+                  } block rounded-full mb-2`}
+                >
                   <span
                     className="bg-blue-500 block py-1 px-4 text-sm text-white font-bold rounded-full"
                     style={{ width: '90%' }}
@@ -259,7 +314,11 @@ export default function Home() {
                     JavaScript / NodeJS
                   </span>
                 </li>
-                <li className="bg-blue-200 block rounded-full mb-2">
+                <li
+                  className={`${
+                    isDarkMode ? 'bg-blue-800' : 'bg-blue-200'
+                  } block rounded-full mb-2`}
+                >
                   <span
                     className="bg-blue-500 block py-1 px-4 text-sm text-white font-bold rounded-full"
                     style={{ width: '70%' }}
@@ -267,7 +326,11 @@ export default function Home() {
                     PHP
                   </span>
                 </li>
-                <li className="bg-blue-200 block rounded-full mb-2">
+                <li
+                  className={`${
+                    isDarkMode ? 'bg-blue-800' : 'bg-blue-200'
+                  } block rounded-full mb-2`}
+                >
                   <span
                     className="bg-blue-500 block py-1 px-4 text-sm text-white font-bold rounded-full"
                     style={{ width: '50%' }}
