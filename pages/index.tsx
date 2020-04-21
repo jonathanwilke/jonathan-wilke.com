@@ -81,6 +81,36 @@ export default function Home() {
     <div className="font-display">
       <Head>
         <title>Jonathan Wilke - Development & Design</title>
+        <meta
+          name="description"
+          content="Gemeinsam mit meinen Kunden entwickle und gestalte ich
+                individuelle Lösungen für Mobile- und Web-Applikationen."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://jonathan-wilke.com/" />
+        <meta
+          property="og:title"
+          content="Jonathan Wilke - Development & Design"
+        />
+        <meta
+          property="og:description"
+          content="Gemeinsam mit meinen Kunden entwickle und gestalte ich
+                individuelle Lösungen für Mobile- und Web-Applikationen."
+        />
+        <meta property="og:image" content="/icon.png" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://jonathan-wilke.com/" />
+        <meta
+          property="twitter:title"
+          content="Jonathan Wilke - Development & Design"
+        />
+        <meta
+          property="twitter:description"
+          content="Gemeinsam mit meinen Kunden entwickle und gestalte ich
+                individuelle Lösungen für Mobile- und Web-Applikationen."
+        />
+        <meta property="twitter:image" content="/icon.png" />
         <link rel="icon" href="/favicon.png" />
         <link
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
