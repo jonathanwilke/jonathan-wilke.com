@@ -25,9 +25,12 @@ export default function Home() {
     currentHours > 20 || currentHours < 8 ? true : false
   )
 
+  console.log('menuOpen: ', menuOpen)
+  console.log('isTop: ', isTop)
+  console.log('isDarkMode: ', isDarkMode)
+
   const handleScroll = useCallback(() => {
     if (window.scrollY < 50 !== isTop) {
-      console.log('change this!')
       setIsTop(window.scrollY < 50)
     }
   }, [isTop, setIsTop])
@@ -67,13 +70,13 @@ export default function Home() {
               ' shadow-xs'
             : 'bg-transparent'
         } ${isDarkMode ? 'text-white' : 'text-blue-900'} ${
-          menuOpen ? 'h-full' : 'h-24'
-        } lg:h-auto p-8 fixed top-0 left-0 w-full transition duration-150 ease-in-out z-50 overflow-hidden transition-all duration-300 ease-in-out`}
+          menuOpen ? 'h-screen' : 'h-24'
+        } lg:h-auto p-8 fixed top-0 left-0 w-full duration-150 ease-in-out z-50 overflow-hidden transition-all duration-300 ease-in-out`}
       >
         <div
           className={`container mx-auto flex flex-col lg:flex-row justify-between items-center ${
             menuOpen ? 'h-full' : 'h-auto'
-          } lg:h-auto`}
+          } lg:h-auto transition-all duration-300 ease-in-out`}
         >
           <div className="flex justify-between items-center w-full mb-8 lg:mb-0 lg:w-auto">
             <img
@@ -86,7 +89,7 @@ export default function Home() {
               <Menu />
             </a>
           </div>
-          <ul className="flex flex-col lg:flex-row items-center text-md mb-8 lg:mb-0">
+          <ul className="flex flex-col lg:flex-row items-center text-lg lg:text-md mb-8 lg:mb-0">
             <li>
               <a href="#about" className="p-4 block font-bold">
                 Über mich
@@ -166,7 +169,7 @@ export default function Home() {
           isDarkMode
             ? 'bg-gradient-dark text-blue-200'
             : 'bg-gradient-light text-blue-900'
-        } px-8 pb-32 pt-40`}
+        } px-8 pb-24 pt-40`}
       >
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row md:items-center">
