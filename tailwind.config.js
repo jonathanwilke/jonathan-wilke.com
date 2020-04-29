@@ -23,6 +23,7 @@ module.exports = {
     gradients: (theme) => ({
       blue: ['#0CC2FF', theme('colors.blue.500'), '135deg'],
       light: ['white', theme('colors.blue.100'), '135deg'],
+      'light-reverse': ['white', theme('colors.blue.100'), '-135deg'],
       dark: [theme('colors.blue.900'), theme('colors.blue.1000'), '135deg'],
     }),
     extend: {

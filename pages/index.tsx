@@ -128,10 +128,13 @@ export default function Home() {
       <nav
         className={`${
           !isTop || menuOpen
-            ? (isDarkMode ? 'bg-gradient-dark' : 'bg-gradient-light') +
-              ' shadow-xs'
+            ? isDarkMode
+              ? 'bg-blue-900'
+              : 'bg-white'
             : 'bg-transparent'
         } ${isDarkMode ? 'text-white' : 'text-blue-900'} ${
+          !isTop && 'lg:py-4'
+        } ${
           menuOpen ? 'h-screen' : 'h-24'
         } lg:h-auto p-8 fixed top-0 left-0 w-full duration-150 ease-in-out z-50 overflow-hidden transition-all duration-300 ease-in-out`}
       >
@@ -209,7 +212,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${
-                  isDarkMode ? 'bg-blue-800' : 'bg-white'
+                  isDarkMode ? 'bg-blue-800' : 'bg-blue-100'
                 } inline-block font-bold w-10 h-10 rounded-full text-center leading-10  text-blue-500 ml-4`}
               >
                 <Twitter size={20} className="inline-block" />
@@ -221,7 +224,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${
-                  isDarkMode ? 'bg-blue-800' : 'bg-white'
+                  isDarkMode ? 'bg-blue-800' : 'bg-blue-100'
                 } inline-block font-bold w-10 h-10 rounded-full text-center leading-10  text-blue-500 ml-4`}
               >
                 <Facebook size={20} className="inline-block" />
@@ -233,7 +236,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${
-                  isDarkMode ? 'bg-blue-800' : 'bg-white'
+                  isDarkMode ? 'bg-blue-800' : 'bg-blue-100'
                 } inline-block font-bold w-10 h-10 rounded-full text-center leading-10  text-blue-500 ml-4`}
               >
                 <GitHub size={20} className="inline-block" />
