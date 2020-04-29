@@ -597,7 +597,7 @@ export default function Home() {
         } px-8 py-16 text-center`}
       >
         © Copyright 2020 by Jonathan Wilke - <a href="/impressum">Impressum</a>{' '}
-        - <a href="/datenschutzerklaerrung">Datenschutzerklärung</a>
+        - <a href="/datenschutzerklaerung">Datenschutzerklärung</a>
       </footer>
     </div>
   )
