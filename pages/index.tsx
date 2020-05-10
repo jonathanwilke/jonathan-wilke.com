@@ -212,8 +212,10 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${
-                  isDarkMode ? 'bg-blue-800' : 'bg-blue-100'
-                } inline-block font-bold w-10 h-10 rounded-full text-center leading-10  text-blue-500 ml-4`}
+                  isDarkMode
+                    ? 'bg-blue-800 hover:bg-blue-700'
+                    : 'bg-blue-100 hover:bg-blue-200'
+                } inline-block font-bold w-10 h-10 rounded-full text-center leading-10  text-blue-500 ml-4 transition-all duration-150 ease-in-out`}
               >
                 <Twitter size={20} className="inline-block" />
               </a>
@@ -224,8 +226,10 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${
-                  isDarkMode ? 'bg-blue-800' : 'bg-blue-100'
-                } inline-block font-bold w-10 h-10 rounded-full text-center leading-10  text-blue-500 ml-4`}
+                  isDarkMode
+                    ? 'bg-blue-800 hover:bg-blue-700'
+                    : 'bg-blue-100 hover:bg-blue-200'
+                } inline-block font-bold w-10 h-10 rounded-full text-center leading-10  text-blue-500 ml-4 transition-all duration-150 ease-in-out`}
               >
                 <Facebook size={20} className="inline-block" />
               </a>
@@ -236,8 +240,10 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${
-                  isDarkMode ? 'bg-blue-800' : 'bg-blue-100'
-                } inline-block font-bold w-10 h-10 rounded-full text-center leading-10  text-blue-500 ml-4`}
+                  isDarkMode
+                    ? 'bg-blue-800 hover:bg-blue-700'
+                    : 'bg-blue-100 hover:bg-blue-200'
+                } inline-block font-bold w-10 h-10 rounded-full text-center leading-10  text-blue-500 ml-4 transition-all duration-150 ease-in-out`}
               >
                 <GitHub size={20} className="inline-block" />
               </a>
@@ -292,14 +298,14 @@ export default function Home() {
         id="about"
         className={`${
           isDarkMode
-            ? 'bg-gradient-dark text-blue-200'
-            : 'bg-gradient-light text-blue-900'
+            ? 'bg-blue-1000 text-blue-200'
+            : 'bg-blue-100 text-blue-900'
         } px-8 pt-16`}
       >
         <div className="container mx-auto">
           <div className="flex flex-col-reverse md:flex-row md:items-center">
             <div className="md:w-1/2">
-              <img src="/jonathan.png" alt="Jonathan Wilke" />
+              <img src="/jonathan.png" alt="Jonathan Wilke" loading="lazy" />
             </div>
             <div className="md:ml-10 pb-16 md:w-1/2">
               <h1
@@ -402,7 +408,7 @@ export default function Home() {
           {projects.map((project, i) => (
             <div
               key={i}
-              className={`shadow-lg rounded-lg px-8 py-10 flex flex-col ${
+              className={`rounded-lg px-8 py-10 flex flex-col ${
                 i % 2 == 0 ? 'md:flex-row' : 'md:flex-row-reverse'
               } items-center mb-6 text-center`}
               style={{
@@ -419,6 +425,7 @@ export default function Home() {
                   style={{ maxWidth: '250px' }}
                   src={project.logo}
                   alt={project.title}
+                  loading="lazy"
                 />
                 {project.description && (
                   <p
@@ -457,6 +464,7 @@ export default function Home() {
                   className="max-w-full"
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -561,7 +569,7 @@ export default function Home() {
                     </div>
                     <div className="mb-6">
                       <label
-                        htmlFor="email"
+                        htmlFor="message"
                         className="block mb-2 font-bold text-blue-900"
                       >
                         Nachricht

@@ -1,21 +1,7 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-  createRef,
-} from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
+import projects, { Project } from '../projects'
 
-const images = [
-  '/work-kammbaeck.png',
-  '/work-familienwerkstatt.png',
-  '/work-pianos.png',
-  '/work-finally-friday.png',
-  '/work-uebe-erleben.png',
-  '/work-vniehues.png',
-]
-
-let sliderTimeout
+let sliderTimeout: any
 const timeoutDuration = 3000
 
 function Slider() {
@@ -25,9 +11,8 @@ function Slider() {
 
   const checkHeight = () => {
     let maxHeight = 0
-    console.log(imageContainers)
     imageContainers.current.forEach((c: any) => {
-      if (c.clientHeight > maxHeight) {
+      if (c?.clientHeight > maxHeight) {
         maxHeight = c.clientHeight
       }
     })
@@ -35,19 +20,19 @@ function Slider() {
   }
 
   const nextItem = useCallback(() => {
-    setPosition(position + 1 > images.length - 1 ? 0 : position + 1)
+    setPosition(position + 1 > projects.length - 1 ? 0 : position + 1)
   }, [position])
 
-  const getPrevious = (position: number) => {
-    return position - 1 < 0 ? images.length - 1 : position - 1
-  }
+  // const getPrevious = (position: number) => {
+  //   return position - 1 < 0 ? images.length - 1 : position - 1
+  // }
 
   useEffect(() => {
     sliderTimeout = setTimeout(() => {
       nextItem()
     }, timeoutDuration)
 
-    checkHeight()
+    setTimeout(() => checkHeight(), 200)
     window.addEventListener('resize', checkHeight)
 
     return () => {
@@ -58,7 +43,7 @@ function Slider() {
 
   return (
     <div className="relative" style={{ minHeight: `${sliderHeight}px` }}>
-      {images.map((i: string, k: number) => (
+      {projects.map((i: Project, k: number) => (
         <div
           className={`absolute inset-0 ${
             position === k ? 'opacity-1 z-20' : 'opacity-0 z-10'
@@ -68,7 +53,11 @@ function Slider() {
             minHeight: `${sliderHeight}px`,
           }}
         >
-          <img ref={(el) => (imageContainers.current[k] = el)} src={i} />
+          <img
+            ref={(el) => (imageContainers.current[k] = el)}
+            src={i.image}
+            alt={i.title}
+          />
         </div>
       ))}
     </div>
