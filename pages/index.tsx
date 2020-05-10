@@ -207,9 +207,15 @@ export default function Home({ projects }: Props) {
                 className="inline-block font-bold w-10 h-10 rounded-full text-center leading-10"
               >
                 {isDarkMode ? (
-                  <Sun className="inline-block" />
+                  <>
+                    <Sun className="inline-block" />
+                    <span className="sr-only">Light-Mode</span>
+                  </>
                 ) : (
-                  <Moon className="inline-block" />
+                  <>
+                    <Moon className="inline-block" />
+                    <span className="sr-only">Dark-Mode</span>
+                  </>
                 )}
               </a>
             </li>
@@ -220,11 +226,12 @@ export default function Home({ projects }: Props) {
                 rel="noopener noreferrer"
                 className={`${
                   isDarkMode
-                    ? 'bg-blue-800 hover:bg-blue-700'
-                    : 'bg-blue-100 hover:bg-blue-200'
-                } inline-block font-bold w-10 h-10 rounded-full text-center leading-10  text-blue-500 ml-4 transition-all duration-150 ease-in-out`}
+                    ? 'bg-blue-800 hover:bg-blue-700 text-blue-300'
+                    : 'bg-blue-100 hover:bg-blue-200 text-blue-600'
+                } inline-block font-bold w-10 h-10 rounded-full text-center leading-10 ml-4 transition-all duration-150 ease-in-out`}
               >
                 <Twitter size={20} className="inline-block" />
+                <span className="sr-only">Twitter</span>
               </a>
             </li>
             <li>
@@ -234,11 +241,12 @@ export default function Home({ projects }: Props) {
                 rel="noopener noreferrer"
                 className={`${
                   isDarkMode
-                    ? 'bg-blue-800 hover:bg-blue-700'
-                    : 'bg-blue-100 hover:bg-blue-200'
-                } inline-block font-bold w-10 h-10 rounded-full text-center leading-10  text-blue-500 ml-4 transition-all duration-150 ease-in-out`}
+                    ? 'bg-blue-800 hover:bg-blue-700 text-blue-300'
+                    : 'bg-blue-100 hover:bg-blue-200 text-blue-600'
+                } inline-block font-bold w-10 h-10 rounded-full text-center leading-10 ml-4 transition-all duration-150 ease-in-out`}
               >
                 <Facebook size={20} className="inline-block" />
+                <span className="sr-only">Facebook</span>
               </a>
             </li>
             <li>
@@ -248,11 +256,12 @@ export default function Home({ projects }: Props) {
                 rel="noopener noreferrer"
                 className={`${
                   isDarkMode
-                    ? 'bg-blue-800 hover:bg-blue-700'
-                    : 'bg-blue-100 hover:bg-blue-200'
-                } inline-block font-bold w-10 h-10 rounded-full text-center leading-10  text-blue-500 ml-4 transition-all duration-150 ease-in-out`}
+                    ? 'bg-blue-800 hover:bg-blue-700 text-blue-300'
+                    : 'bg-blue-100 hover:bg-blue-200 text-blue-600'
+                } inline-block font-bold w-10 h-10 rounded-full text-center leading-10 ml-4 transition-all duration-150 ease-in-out`}
               >
                 <GitHub size={20} className="inline-block" />
+                <span className="sr-only">Github</span>
               </a>
             </li>
           </ul>
@@ -285,9 +294,9 @@ export default function Home({ projects }: Props) {
               <a
                 className={`${
                   isDarkMode
-                    ? 'bg-blue-900 hover:bg-blue-800'
-                    : 'bg-blue-100 hover:bg-blue-200'
-                } font-bold text-blue-500 px-6 py-2 rounded-full transition-color duration-150 ease-in-out`}
+                    ? 'bg-blue-900 hover:bg-blue-800 text-blue-300'
+                    : 'bg-blue-100 hover:bg-blue-200 text-blue-600'
+                } font-bold px-6 py-2 rounded-full transition-color duration-150 ease-in-out`}
                 href="#projects"
               >
                 Meine Projekte ansehen{' '}
@@ -332,11 +341,11 @@ export default function Home({ projects }: Props) {
               <ul>
                 <li
                   className={`${
-                    isDarkMode ? 'bg-blue-800' : 'bg-blue-200'
+                    isDarkMode ? 'bg-blue-900' : 'bg-blue-200'
                   } block rounded-full mb-2`}
                 >
                   <span
-                    className="bg-blue-500 block py-1 px-4 text-sm text-white font-bold rounded-full"
+                    className="bg-blue-600 block py-1 px-4 text-sm text-white font-bold rounded-full"
                     style={{ width: '90%' }}
                   >
                     UI / UX Design
@@ -344,11 +353,11 @@ export default function Home({ projects }: Props) {
                 </li>
                 <li
                   className={`${
-                    isDarkMode ? 'bg-blue-800' : 'bg-blue-200'
+                    isDarkMode ? 'bg-blue-900' : 'bg-blue-200'
                   } block rounded-full mb-2`}
                 >
                   <span
-                    className="bg-blue-500 block py-1 px-4 text-sm text-white font-bold rounded-full"
+                    className="bg-blue-600 block py-1 px-4 text-sm text-white font-bold rounded-full"
                     style={{ width: '100%' }}
                   >
                     HTML 5 / CSS 3
@@ -356,11 +365,11 @@ export default function Home({ projects }: Props) {
                 </li>
                 <li
                   className={`${
-                    isDarkMode ? 'bg-blue-800' : 'bg-blue-200'
+                    isDarkMode ? 'bg-blue-900' : 'bg-blue-200'
                   } block rounded-full mb-2`}
                 >
                   <span
-                    className="bg-blue-500 block py-1 px-4 text-sm text-white font-bold rounded-full"
+                    className="bg-blue-600 block py-1 px-4 text-sm text-white font-bold rounded-full"
                     style={{ width: '90%' }}
                   >
                     JavaScript / NodeJS
@@ -368,11 +377,11 @@ export default function Home({ projects }: Props) {
                 </li>
                 <li
                   className={`${
-                    isDarkMode ? 'bg-blue-800' : 'bg-blue-200'
+                    isDarkMode ? 'bg-blue-900' : 'bg-blue-200'
                   } block rounded-full mb-2`}
                 >
                   <span
-                    className="bg-blue-500 block py-1 px-4 text-sm text-white font-bold rounded-full"
+                    className="bg-blue-600 block py-1 px-4 text-sm text-white font-bold rounded-full"
                     style={{ width: '70%' }}
                   >
                     PHP
@@ -380,11 +389,11 @@ export default function Home({ projects }: Props) {
                 </li>
                 <li
                   className={`${
-                    isDarkMode ? 'bg-blue-800' : 'bg-blue-200'
+                    isDarkMode ? 'bg-blue-900' : 'bg-blue-200'
                   } block rounded-full mb-2`}
                 >
                   <span
-                    className="bg-blue-500 block py-1 px-4 text-sm text-white font-bold rounded-full"
+                    className="bg-blue-600 block py-1 px-4 text-sm text-white font-bold rounded-full"
                     style={{ width: '50%' }}
                   >
                     Go
@@ -430,7 +439,7 @@ export default function Home({ projects }: Props) {
                 <img
                   className="inline-block mb-6 w-full"
                   style={{ maxWidth: '250px' }}
-                  src={`${project.logo.url}&w=500&q=90`}
+                  src={`${project.logo.url}&w=500&auto=compress&fm=webp`}
                   alt={RichText.asText(project.title)}
                   loading="lazy"
                 />
@@ -471,7 +480,7 @@ export default function Home({ projects }: Props) {
               <div className="md:w-1/2  lg:w-2/3">
                 <img
                   className="max-w-full"
-                  src={`${project.mockup.url}&w=1000&q=90`}
+                  src={`${project.mockup.url}&w=1000&auto=compress&fm=webp`}
                   alt={RichText.asText(project.title)}
                   loading="lazy"
                 />
