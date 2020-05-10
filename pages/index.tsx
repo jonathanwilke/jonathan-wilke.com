@@ -439,7 +439,7 @@ export default function Home({ projects }: Props) {
                 <img
                   className="inline-block mb-6 w-full"
                   style={{ maxWidth: '250px' }}
-                  src={`${project.logo.url}&w=500&auto=compress&fm=webp`}
+                  src={`${project.logo.url}&w=300&auto=compress&fm=webp`}
                   alt={RichText.asText(project.title)}
                   loading="lazy"
                 />
@@ -480,7 +480,7 @@ export default function Home({ projects }: Props) {
               <div className="md:w-1/2  lg:w-2/3">
                 <img
                   className="max-w-full"
-                  src={`${project.mockup.url}&w=1000&auto=compress&fm=webp`}
+                  src={`${project.mockup.url}&w=800&auto=compress&fm=webp`}
                   alt={RichText.asText(project.title)}
                   loading="lazy"
                 />
