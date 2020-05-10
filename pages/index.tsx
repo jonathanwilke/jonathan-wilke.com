@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback, MouseEvent } from 'react'
 import Head from 'next/head'
-// import chroma from 'chroma-js'
-import projects from '../projects'
 import { useForm, ValidationError } from '@statickit/react'
 import {
   ArrowRight,
@@ -13,10 +11,18 @@ import {
   Phone,
   Mail,
   Menu,
+  Link,
 } from 'react-feather'
 import Slider from '../components/Slider'
+import { prismicClient } from '../prismic.config'
+import Prismic from 'prismic-javascript'
+import { RichText } from 'prismic-reactjs'
 
-export default function Home() {
+interface Props {
+  projects: Array<any>
+}
+
+export default function Home({ projects }: Props) {
   const [isTop, setIsTop] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
   const [visibleSection, setVisibleSection] = useState('hero')
@@ -152,6 +158,7 @@ export default function Home() {
             />
             <a href="#" onClick={toggleMenu} className="lg:hidden">
               <Menu />
+              <span className="sr-only">Menü</span>
             </a>
           </div>
           <ul className="flex flex-col lg:flex-row items-center text-lg lg:text-md mb-8 lg:mb-0">
@@ -288,7 +295,7 @@ export default function Home() {
               </a>
             </div>
             <div className="md:w-1/2">
-              <Slider />
+              <Slider projects={projects} />
             </div>
           </div>
         </div>
@@ -412,7 +419,7 @@ export default function Home() {
                 i % 2 == 0 ? 'md:flex-row' : 'md:flex-row-reverse'
               } items-center mb-6 text-center`}
               style={{
-                background: project.backgroundColor,
+                background: project.background_color,
               }}
             >
               <div
@@ -423,8 +430,8 @@ export default function Home() {
                 <img
                   className="inline-block mb-6 w-full"
                   style={{ maxWidth: '250px' }}
-                  src={project.logo}
-                  alt={project.title}
+                  src={`${project.logo.url}&w=500&q=90`}
+                  alt={RichText.asText(project.title)}
                   loading="lazy"
                 />
                 {project.description && (
@@ -433,7 +440,7 @@ export default function Home() {
                       project.dark ? 'text-white' : 'text-blue-900'
                     } mb-6`}
                   >
-                    {project.description}
+                    {RichText.asText(project.description)}
                   </p>
                 )}
                 <div className="mb-6">
@@ -441,18 +448,20 @@ export default function Home() {
                     project.tags.map((t, i) => (
                       <span
                         className="inline-block px-2 uppercase text-sm tracking-wide font-bold"
-                        style={{ color: project.mainColor }}
-                        key={`project-tag-${project.title}-${i}`}
+                        style={{ color: project.main_color }}
+                        key={`project-tag-${RichText.asText(
+                          project.title
+                        )}-${i}`}
                       >
                         #{t}
                       </span>
                     ))}
                 </div>
-                {project.link !== undefined && (
+                {project.link?.url && (
                   <a
                     className="inline-block text-center rounded-full text-white px-6 py-2"
-                    style={{ backgroundColor: project.mainColor }}
-                    href={project.link}
+                    style={{ backgroundColor: project.main_color }}
+                    href={project.link.url}
                     target="__blank"
                   >
                     Seite ansehen &rarr;
@@ -462,8 +471,8 @@ export default function Home() {
               <div className="md:w-1/2  lg:w-2/3">
                 <img
                   className="max-w-full"
-                  src={project.image}
-                  alt={project.title}
+                  src={`${project.mockup.url}&w=1000&q=90`}
+                  alt={RichText.asText(project.title)}
                   loading="lazy"
                 />
               </div>
@@ -612,4 +621,17 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+export async function getStaticProps({ req }) {
+  const response = await prismicClient(req).query(
+    Prismic.Predicates.at('document.type', 'project'),
+    { orderings: '[document.first_publication_date]' }
+  )
+  console.dir(response.results[0].data.link)
+  return {
+    props: {
+      projects: response.results.map((p) => ({ ...p.data, tags: p.tags })),
+    },
+  }
 }

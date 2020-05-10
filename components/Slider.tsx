@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
-import projects, { Project } from '../projects'
+import { RichText } from 'prismic-reactjs'
 
 let sliderTimeout: any
 const timeoutDuration = 3000
 
-function Slider() {
+interface Props {
+  projects: Array<any>
+}
+
+function Slider({ projects }: Props) {
   const imageContainers = useRef([])
   const [position, setPosition] = useState(0)
   const [sliderHeight, setSliderHeight] = useState(0)
@@ -42,8 +46,11 @@ function Slider() {
   }, [position])
 
   return (
-    <div className="relative" style={{ minHeight: `${sliderHeight}px` }}>
-      {projects.map((i: Project, k: number) => (
+    <div
+      className="relative overflow-hidden"
+      style={{ minHeight: `${sliderHeight}px` }}
+    >
+      {projects.map((project: any, k: number) => (
         <div
           className={`absolute inset-0 ${
             position === k ? 'opacity-1 z-20' : 'opacity-0 z-10'
@@ -55,8 +62,8 @@ function Slider() {
         >
           <img
             ref={(el) => (imageContainers.current[k] = el)}
-            src={i.image}
-            alt={i.title}
+            src={`${project.mockup.url}&w=800&q=90`}
+            alt={RichText.asText(project.title)}
           />
         </div>
       ))}
