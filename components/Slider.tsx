@@ -54,7 +54,7 @@ function Slider({ projects }: Props) {
         <div
           className={`absolute inset-0 ${
             position === k ? 'opacity-1 z-20' : 'opacity-0 z-10'
-          } transition-opacity duration-1000 ease-in-out`}
+          } transition-all duration-1000 ease-in-out`}
           key={`slider-item-${k}`}
           style={{
             minHeight: `${sliderHeight}px`,

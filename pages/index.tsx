@@ -273,7 +273,7 @@ export default function Home({ projects }: Props) {
         className={`${
           isDarkMode
             ? 'bg-gradient-dark text-blue-200'
-            : 'bg-gradient-light text-blue-900'
+            : 'bg-gradient-light text-gray-600'
         } px-8 pb-24 pt-40`}
       >
         <div className="container mx-auto">
@@ -315,7 +315,7 @@ export default function Home({ projects }: Props) {
         className={`${
           isDarkMode
             ? 'bg-blue-1000 text-blue-200'
-            : 'bg-blue-100 text-blue-900'
+            : 'bg-blue-100 text-gray-600'
         } px-8 pt-16`}
       >
         <div className="container mx-auto">
@@ -492,7 +492,7 @@ export default function Home({ projects }: Props) {
 
       <section
         id="contact"
-        className="bg-gradient-blue px-8 py-16 text-blue-900"
+        className="bg-gradient-blue px-8 py-16 text-blue-700"
       >
         <div className="container max-w-screen-sm md:max-w-screen-lg mx-auto">
           <div className="flex flex-col md:flex-row">
