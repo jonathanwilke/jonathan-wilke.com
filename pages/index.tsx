@@ -141,7 +141,7 @@ export default function Home({ projects }: Props) {
         } ${isDarkMode ? 'text-white' : 'text-blue-900'} ${
           !isTop && 'lg:py-4 shadow-xs'
         } ${
-          menuOpen ? 'h-screen' : 'h-24'
+          menuOpen ? 'h-screen pb-12' : 'h-24'
         } lg:h-auto p-8 fixed top-0 left-0 w-full duration-150 ease-in-out z-50 overflow-hidden transition-all duration-300 ease-in-out`}
       >
         <div
@@ -278,7 +278,7 @@ export default function Home({ projects }: Props) {
       >
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row md:items-center">
-            <div className="mb-8 md:mb-0 mr-10 md:w-1/2">
+            <div className="mb-8 md:mb-0 md:mr-10 md:w-1/2">
               <h2
                 className={`${
                   isDarkMode ? 'text-white' : 'text-blue-900'
