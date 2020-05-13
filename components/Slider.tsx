@@ -62,7 +62,7 @@ function Slider({ projects }: Props) {
         >
           <img
             ref={(el) => (imageContainers.current[k] = el)}
-            src={`${project.mockup.url}&w=800&auto=compress&fm=webp`}
+            src={`${project.mockup.url}&w=800&auto=compress`}
             alt={RichText.asText(project.title)}
           />
         </div>

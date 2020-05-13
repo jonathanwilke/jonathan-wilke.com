@@ -126,7 +126,7 @@ export default function Home({ projects }: Props) {
         />
         <link rel="icon" href="/favicon.png" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
           rel="stylesheet"
         />
       </Head>
@@ -139,7 +139,7 @@ export default function Home({ projects }: Props) {
               : 'bg-white'
             : 'bg-transparent'
         } ${isDarkMode ? 'text-white' : 'text-blue-900'} ${
-          !isTop && 'lg:py-4'
+          !isTop && 'lg:py-4 shadow-xs'
         } ${
           menuOpen ? 'h-screen' : 'h-24'
         } lg:h-auto p-8 fixed top-0 left-0 w-full duration-150 ease-in-out z-50 overflow-hidden transition-all duration-300 ease-in-out`}
