@@ -332,9 +332,9 @@ export default function Home({ projects }: Props) {
                 Über mich
               </h1>
               <p className="mb-6">
-                Ich bin Jonathan Wilke und entwickle und gestalte seit über 13
-                Jahren Mobile- und Web-Applikationen. Die letzen 3 Jahre habe
-                ich Computervisualistik und Design studiert. Durch viele
+                Mein Name ist Jonathan Wilke und ich entwickle und gestalte seit
+                über 13 Jahren Mobile- und Web-Applikationen. Die letzen 3 Jahre
+                habe ich Computervisualistik und Design studiert. Durch viele
                 verschiedene Projekte konnte ich schon viel Erfahrung in einem
                 breiten Spektrum an Programmiersprachen und Frameworks sammeln.
               </p>
