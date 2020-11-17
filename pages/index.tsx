@@ -508,20 +508,6 @@ export default function Home({ projects }: Props) {
                 Sie mich an. Ich freue mich darauf, von Ihnen zu hören!
               </p>
               <ul className="flex items-start flex-wrap mb-8">
-                <li className="mb-3 mr-6">
-                  <a
-                    href="http://twitter.com/jonathan_wilke"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block rounded-full text-center leading-10"
-                  >
-                    <Phone
-                      size={20}
-                      className="inline-block mr-3  text-white"
-                    />
-                    <span>0151 4056 3078</span>
-                  </a>
-                </li>
                 <li>
                   <a
                     href="mailto:info@jonathan-wilke.de"
